@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verandah Properties — Rental Market Analysis · 1459 Lake Baldwin Lane Unit B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#008C82; --teal-deep:#04635c; --gold:#D4AF50;
+    --ink:#22312f; --paper:#fffdf8; --ivory:#f7f4ec; --line:#e4ddcb; --muted:#6f7a76;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 5%, rgba(0,140,130,.06), transparent 38%),
+      radial-gradient(circle at 92% 96%, rgba(212,175,80,.07), transparent 44%),
+      var(--ivory);
+    color:var(--ink); font-family:'Jost',sans-serif; font-weight:300; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:840px; margin:0 auto; padding:54px 30px 80px;}
+
+  .mast{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:26px;}
+  .mast .eyebrow{font-size:.7rem; letter-spacing:.34em; text-transform:uppercase; color:var(--teal); font-weight:500;}
+  .mast h1{font-family:'Cormorant Garamond',serif; font-weight:500; font-size:2.5rem; line-height:1; margin:6px 0 0;}
+  .mast .date{font-size:.78rem; color:var(--muted); text-align:right; line-height:1.5;}
+
+  .subject{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:18px 24px; margin-bottom:26px;
+    box-shadow:0 14px 30px -26px rgba(4,99,92,.4);}
+  .subject .addr{font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600; color:var(--teal-deep);}
+  .subject .facts{display:flex; flex-wrap:wrap; gap:6px 26px; margin-top:8px; font-size:.86rem;}
+  .subject .facts span b{font-weight:500; color:var(--ink);}
+  .subject .facts span{color:var(--muted);}
+
+  .rec{display:flex; align-items:center; gap:26px; background:linear-gradient(120deg,var(--teal-deep),var(--teal));
+    color:#fff; border-radius:8px; padding:24px 30px; margin-bottom:28px; box-shadow:0 20px 40px -26px rgba(4,99,92,.6);}
+  .rec .num{font-family:'Cormorant Garamond',serif; font-size:3.4rem; font-weight:600; line-height:.95; white-space:nowrap;}
+  .rec .num small{font-size:1rem; font-weight:400; opacity:.85;}
+  .rec .lbl{border-left:1px solid rgba(255,255,255,.35); padding-left:24px;}
+  .rec .lbl .k{font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; opacity:.85; font-weight:500;}
+  .rec .lbl .v{font-family:'Cormorant Garamond',serif; font-size:1.3rem; line-height:1.2; margin-top:3px;}
+
+  h2{font-family:'Jost',sans-serif; font-weight:600; font-size:.76rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--teal); margin:30px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  p{margin:0 0 12px; font-size:.95rem;}
+  p .hl{color:var(--teal-deep); font-weight:500;}
+  em{font-style:italic;}
+
+  table.comps{width:100%; border-collapse:collapse; font-size:.84rem; background:var(--paper);
+    border:1px solid var(--line); border-radius:6px; overflow:hidden; margin-top:4px;}
+  table.comps th{background:var(--teal-deep); color:#fff; font-family:'Jost',sans-serif; font-weight:500;
+    font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; text-align:left; padding:10px 12px;}
+  table.comps th.r, table.comps td.r{text-align:right;}
+  table.comps td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:middle;}
+  table.comps tr:nth-child(even) td{background:rgba(0,140,130,.03);}
+  table.comps tr.star td{background:rgba(212,175,80,.16); font-weight:400;}
+  table.comps tr.star td:first-child{font-weight:500; color:var(--teal-deep);}
+  .pin{display:inline-block; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:#8a6d18;
+    background:rgba(212,175,80,.3); padding:1px 6px; border-radius:3px; margin-left:6px; vertical-align:middle;}
+  .fast{color:var(--teal-deep); font-weight:600;}
+  .slow{color:#9c5a3c;}
+  table.comps tfoot td{border-top:2px solid var(--line); font-weight:500; color:var(--teal-deep); font-size:.82rem;}
+
+  .tiers{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:6px;}
+  .tier{background:var(--paper); border:1px solid var(--line); border-top:3px solid var(--line); border-radius:6px; padding:16px 18px;}
+  .tier.go{border-top-color:var(--gold);}
+  .tier .price{font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:600; color:var(--ink); line-height:1;}
+  .tier .tag{font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin:7px 0 5px;}
+  .tier.go .tag{color:var(--gold);}
+  .tier.lo .tag{color:var(--teal);}
+  .tier.hi .tag{color:var(--muted);}
+  .tier p{font-size:.8rem; color:var(--muted); margin:0; line-height:1.45;}
+
+  .notes{background:rgba(0,140,130,.05); border-left:3px solid var(--teal); border-radius:0 5px 5px 0; padding:14px 18px; margin-top:6px;}
+  .notes p{font-size:.9rem; margin:0 0 8px;} .notes p:last-child{margin:0;}
+
+  footer{margin-top:40px; padding-top:22px; border-top:1px solid var(--line); text-align:center;}
+  footer .tag{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.3rem; color:var(--teal-deep);}
+  footer .by{font-size:.82rem; color:var(--ink); margin-top:8px;}
+  footer .by b{font-weight:500;}
+  footer .fine{font-size:.66rem; color:var(--muted); line-height:1.5; max-width:620px; margin:12px auto 0;}
+
+  @media(max-width:640px){
+    .sheet{padding:36px 16px 60px;}
+    .mast{flex-direction:column; align-items:flex-start; gap:8px;} .mast .date{text-align:left;}
+    .rec{flex-direction:column; align-items:flex-start; gap:14px;} .rec .lbl{border-left:none; border-top:1px solid rgba(255,255,255,.3); padding-left:0; padding-top:14px;}
+    .tiers{grid-template-columns:1fr;}
+    table.comps{font-size:.74rem;} table.comps th,table.comps td{padding:7px 8px;}
+  }
+  @media print{ body{background:#fff;} .subject,.comps,.tier{box-shadow:none;} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="mast">
+    <div>
+      <div class="eyebrow">Verandah Properties · Rental Market Analysis</div>
+      <h1>Rental Market Analysis</h1>
+    </div>
+    <div class="date">Prepared June 3, 2026<br>Baldwin Park · Orlando, FL</div>
+  </div>
+
+  <div class="subject">
+    <div class="addr">1459 Lake Baldwin Lane, Unit B · Orlando, FL 32814</div>
+    <div class="facts">
+      <span><b>3</b> Bed</span><span><b>2.5</b> Bath</span><span><b>1,809</b> Sq Ft</span>
+      <span><b>2-Car</b> Garage</span><span>Townhouse</span><span>Baldwin Park</span>
+    </div>
+  </div>
+
+  <div class="rec">
+    <div class="num">$3,795<small>/mo</small></div>
+    <div class="lbl">
+      <div class="k">Recommended Starting Rent</div>
+      <div class="v">Positioned to lease in 21 days or less</div>
+    </div>
+  </div>
+
+  <h2>The Case for $3,795</h2>
+  <p>The strongest signal in the data comes from your own street. <span class="hl">1470 Lake Baldwin Lane #B</span> — the same street and same unit type as your home — listed at $3,800, leased at $3,900 (102.6% of asking), and did so in just <span class="hl">four days on market</span>. That is the proof: a well-priced "#B" residence on Lake Baldwin Lane moves almost immediately, and strong demand can carry it above asking.</p>
+  <p>Your home is a touch smaller than that comparable (1,809 vs. 1,903 sq ft) and shows slightly more carpet, so we open at <span class="hl">$3,795</span> — a hair under the exact price that leased next door in four days — rather than reaching higher. The aim is to be the clear value on the street and let buyer demand do the rest through showings, exactly as it did next door.</p>
+
+  <h2>Comparable Leased Residences · Baldwin Park</h2>
+  <table class="comps">
+    <thead>
+      <tr><th>Address</th><th>Bd/Ba</th><th class="r">Sq Ft</th><th>Year</th><th class="r">Leased Rent</th><th class="r">Days on Mkt</th></tr>
+    </thead>
+    <tbody>
+      <tr class="star"><td>1470 Lake Baldwin Ln #B <span class="pin">Same Street</span></td><td>3 / 2.5</td><td class="r">1,903</td><td>2007</td><td class="r">$3,900</td><td class="r fast">4</td></tr>
+      <tr><td>4307 Corrine Dr</td><td>3 / 2.5</td><td class="r">2,077</td><td>2005</td><td class="r">$3,775</td><td class="r">30</td></tr>
+      <tr><td>1655 Lakemont Ave</td><td>3 / 3.5</td><td class="r">2,060</td><td>2004</td><td class="r">$3,950</td><td class="r slow">45</td></tr>
+      <tr><td>2856 Kemper Ave</td><td>3 / 2.5</td><td class="r">1,667</td><td>2005</td><td class="r">$3,795</td><td class="r slow">66</td></tr>
+      <tr><td>4461 Trapp Ln</td><td>3 / 2.0</td><td class="r">1,709</td><td>2003</td><td class="r">$3,900</td><td class="r slow">81</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Average</td><td>3 / 2.5</td><td class="r">1,883</td><td>2005</td><td class="r">$3,864</td><td class="r">45</td></tr>
+    </tfoot>
+  </table>
+  <p style="font-size:.82rem; color:var(--muted); margin-top:10px;">The market is currently landlord-favorable — leased homes are averaging 101% of asking rent. Notably, the residences listed at $3,850–$3,900 elsewhere in Baldwin Park took 45–81 days, while the only sub-21-day lease in the set was the $3,800 home on Lake Baldwin Lane.</p>
+
+  <h2>Pricing Strategy</h2>
+  <div class="tiers">
+    <div class="tier go">
+      <div class="price">$3,795</div>
+      <div class="tag">★ Recommended Start</div>
+      <p>Opens a hair under the four-day mover on your street, positioning the home as the clear value from day one and inviting demand to carry it at full ask.</p>
+    </div>
+    <div class="tier lo">
+      <div class="price">$3,695</div>
+      <div class="tag">Potential Floor</div>
+      <p>If showings are light through the first 10–14 days, a measured step to $3,695 keeps you the decisive value and protects the 21-day window — without chasing the market down.</p>
+    </div>
+  </div>
+
+  <h2>To Protect the Price</h2>
+  <div class="notes">
+    <p>Condition is the one soft spot, so presentation carries the value. Professional photography and a quick carpet steam-clean and light staging will keep showings converting and defend the $3,795 — well worth it on a home that should lease quickly.</p>
+    <p>With the right price and presentation, this residence is well positioned to lease inside the 21-day window in one of Orlando's most sought-after neighborhoods.</p>
+  </div>
+
+  <footer>
+    <div class="tag">Curating Lake Nona's Finest Rental Portfolio</div>
+    <div class="by">Prepared by <b>Pamela Syvertson</b> · Owner &amp; Broker · Verandah Properties, LLC</div>
+    <div class="fine">This is an opinion of value or Comparative Market Analysis and should not be considered an appraisal. In making any decision that relies upon this work, please note it has not followed the guidelines for development of an appraisal contained in the Uniform Standards of Professional Appraisal Practice. Comparable data © 2026 CoreLogic. All rights reserved.</div>
+  </footer>
+
+</div>
+</body>
+</html>
